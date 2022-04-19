@@ -1,0 +1,124 @@
+<div style="margin-bottom:4%"></div>
+<div class="container" *ngIf="currentUser; else loggedOut">
+
+    <h2 style="text-align: center;"><strong>Senarai saya</strong></h2>
+
+    <div class="row">
+      <div class="col-md-7">
+        <input class="form-control" type="text" placeholder="Masukkan nama penerima" [(ngModel)]="nama"><!---->
+      </div>
+      <div style="float: right;
+      width: 10%;
+      margin-left: 10px;">
+        <button class="button" type="button"  style="padding: 7px 14px;" (click)="searchpenerima()"><!---->Cari</button>
+      </div>
+      <div>
+        <!---->
+        <button (click)="navigatetoadd()" class="button" type="button" style="width: auto; display: inline-block; text-align: center; margin-left: 10px; padding: 7px 14px;">Tambah Penerima</button>
+      </div>
+      <div>
+        <!-- -->
+        <button (click)="GeneratePDF()" class="button" type="button" style="width: auto; display: inline-block; text-align: center; margin-left: 10px; padding: 7px 14px;">Simpan Sijil</button>
+      </div>
+      
+    </div>
+    <div style="margin: 1cm"></div>
+
+    <table class="table table-bordered css-serial">
+
+      <thead style="background-color: #6ec5c9;border-color: black;">
+        <tr>
+          <th span="1" style="width: 1%;">Bil.</th>
+          <th span="1" style="width: 19%;">Nama</th>
+          <th span="1" style="width: 10%;">No. K/P</th>
+          <th span="1" style="width: 5%;">Peranan</th>
+          <th span="1" style="width: 14%;">Nama Program</th>
+          <th span="1" style="width: 10%;">Tarikh</th>
+          <th span="1" style="width: 10%;">Tempat</th>
+          <th style="width: 9cm;">Tindakan</th>
+        </tr>
+      </thead>
+      
+      <tbody style="background-color: white;">
+        <tr *ngFor="let i=index;let ind of collection.data;let Penerima of penerima | paginate : {
+          itemsPerPage: pageSize,
+          currentPage: page,
+          totalItems: count
+        }; ">
+        <td *ngIf="page==1">{{ i+1 }}</td>
+        <td *ngIf="page>1">{{((page-1)*3)+(i+1)}}</td>
+        <td>{{ Penerima.nama }}</td>
+        <td>{{ Penerima.nokadpengenalan }}</td>
+        <td>{{ Penerima.peranan }}</td>
+        <td>{{ Penerima.program }}</td>
+        <td>{{ Penerima.tarikh }}</td>
+        <td>{{ Penerima.tempat }}</td>
+        <td>
+          <button type="button" class="cancelbtn" routerLink="/edit/{{ Penerima.id }}">Edit</button>
+          <button type="button" class="deletebtn" (click)="deletePenerima(Penerima.id)">Buang</button>
+          <!--'"
+            -->
+          
+          <div id="id01" class="modal">
+
+            <span onclick="document.getElementById('id01').style.display='none'" class="close" title="Close Modal">x</span>
+
+            <form class="modal-content" action="/action_page.php">
+              <div class="containing">
+                <h1 style="text-align: center; font-size: 24; font-weight:bold; padding-bottom: 0.5cm;">Buang penerima {{Penerima.id}}?</h1>
+                <div class="clearfix">
+                  <button type="button" onclick="document.getElementById('id01').style.display='none'" class="cancelbtn">Batal</button>
+                  <button type="button" class="deletebtn" (click)="deletePenerima(id)">Buang</button>
+                </div>
+              </div>
+            </form>
+
+          </div>
+
+        </td>
+      </tr>
+      
+    </tbody>
+    <tfoot class="grey lighten-5 w-100">
+      <tr>
+        <td colspan="8" style="background-color: rgb(231, 237, 240);">
+          <mdb-table-pagination [tableEl]="tableEl" [searchDataSource]="elements">
+            <pagination-controls
+            previousLabel="Sebelum"
+            nextLabel="Seterusnya"
+            responsive="true"
+            (pageChange)="handlePageChange($event)"
+          ></pagination-controls>
+          </mdb-table-pagination>
+        </td>
+      </tr>
+      </tfoot>
+    </table>
+
+    
+    
+
+
+    <script>
+    function myFunction(id){
+        return id;
+      }
+    var modal = document.getElementById('id01');
+    window.onclick = function(event){
+      if (event.target==modal){
+        modal.style.display = "none";
+      }
+    }
+    
+    </script>
+
+
+  </div>
+  
+
+  <ng-template #loggedOut style="text-align: center;">
+    <div style="text-align: center; font-weight: bolder;" class="up-three">Sila log masuk</div>
+    <div class= "flex-parent jc-center">
+      <button type="button" class="button" (click)="navigatetologin()" style="width:150px;">Log Masuk</button>
+    </div>
+  </ng-template>

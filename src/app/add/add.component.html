@@ -1,0 +1,129 @@
+<meta name="viewport" content="width=device-width, initial-scale=1">
+
+<style>
+  select:required:invalid {
+  color: gray;
+}
+option[value=""][disabled] {
+  display: none;
+}
+option {
+  color: black;
+}
+</style>
+
+<div style="margin-bottom:5%"></div>
+<div class="container submit-form" *ngIf="currentUser; else loggedOut">
+  <div *ngIf ="!tambah"><!---->
+    <h2 style="text-align: center;"><strong>Tambah Penerima</strong></h2>
+    <form>
+
+        <div class="row">
+          <div class="col-25">
+            <label for="Name">Nama</label>
+          </div>
+          <div class="col-75">
+            <input class="form-control" type="text" id="nama" name="nama" oninput="let p=this.selectionStart;this.value=this.value.toUpperCase();this.setSelectionRange(p, p);" placeholder="Masukkan nama"
+            required [(ngModel)]="penerima.nama"><!---->
+          </div>
+
+        </div>
+        <div class="row">
+          <div class="col-25">
+            <label for="IC">No. Kad Pengenalan</label>
+          </div>
+          <div class="col-75">
+            <input class="form-control" type="text" id="nokadpengenalan" name="nokadpengenalan" placeholder="Masukkan nombor kad pengenalan" 
+            required [(ngModel)]="penerima.nokadpengenalan"><!---->
+          </div>
+
+        </div>
+        <div style="margin: 6px;"></div>
+        <div class="row">
+          <div class="col-25">
+            <label for="peranan">Peranan</label>
+          </div>
+          
+          <div class="col-75">
+            <select id="peranan" name="peranan" required [(ngModel)]="penerima.peranan">
+              <!---->
+              <option value="" disabled selected>Sila pilih peranan</option>
+              <option value="Peserta">Peserta</option>
+              <option value="Urusetia">Urusetia</option>
+              <option value="Penceramah">Penceramah</option>
+            </select>
+          </div>
+        </div>
+
+        <div class="row">
+          <div class="col-25">
+            <label for="program">Nama Program</label>
+          </div>
+          <div class="col-75" style="margin-bottom: 6px;">
+            <input type="text" id="program" name="program" placeholder="Masukkan nama program" [(ngModel)]="penerima.program">
+            <!---->
+          </div>
+        </div>
+  
+        <div class="row">
+          <div class="col-25">
+            <label class="control-label" for="tarikh">Tarikh</label>
+          </div>
+          <div class="col-75" id="tarikh">
+            <input type="text" id="tarikh" name="tarikh" placeholder="Masukkan tarikh program berlangsung" [(ngModel)]="penerima.tarikh">
+            <!---->
+          </div>
+        </div>
+  
+        <div class="row">
+          <div class="col-25">
+            <label for="tempat">Tempat Berlangsung</label>
+          </div>
+          <div class="col-75">
+            <input type="text" id="tempat" name="tempat" placeholder="Masukkan tempat program berlangsung" [(ngModel)]="penerima.tempat">
+          <!---->
+          </div>
+        </div>
+
+
+        
+        <div class="row flex-parent jc-center ">
+            <button type="submit button" class="button btn-success" style="width:150px;" (click)="AddReceiver()">
+              <!-- -->Simpan Penerima</button>
+        </div>
+
+        <div *ngIf="tambah">
+          <h4>Penerima berjaya ditambah!</h4>
+          <div class="row flex-parent jc-center ">
+            <button type="submit button" class="button btn-success" style="width:150px;">
+              <!--(click)="newPenerima()" -->Tambah Penerima</button>
+        </div>
+        </div>
+      </form>
+      
+      <script>
+        const phone = document.getElementById('nokadpengenalan');
+        phone.addEventListener("keydown", (e) => {
+          if(e.key === "Backspace" || e.key === "Delete")
+          return;
+          if (e.target.value.length === 4){
+            phone.value = phone.value + "-";
+          }
+          if (e.target.value.length === 9){
+            phone.value = phone.value + "-";
+          }
+          if (e.target.value.length === 14){
+            phone.value = phone.value + "-";
+          }
+      
+        })
+      </script>
+</div>
+</div>
+
+<ng-template #loggedOut style="text-align: center;">
+  <div style="text-align: center; font-weight: bolder;" class="up-three">Sila log masuk</div>
+  <div class= "flex-parent jc-center">
+    <button type="button" class="button" (click)="navigatetologin()" style="width:150px;">Log Masuk</button>
+  </div>
+</ng-template>

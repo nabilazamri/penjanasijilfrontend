@@ -1,0 +1,22 @@
+<div style="margin-bottom:5%"></div>
+
+<div class="container" *ngIf="currentUser; else loggedOut">
+
+
+    <h2 style="text-align: center;"><strong>Import Senarai Penerima</strong></h2>
+    <div class='loadExcelInput'>
+      <input type="file" (change)="fileChangeEvent($event)" style="margin-top:2%;" placeholder="Pilih fail (format: .xlsx)" accept=".xlsx" />
+      <div>
+      <button type="button" class="button" style="width:250px;margin-top:2%;"
+          (click)="uploadFile();">Muat Naik</button></div>
+    </div>
+    
+  </div> 
+
+  <ng-template #loggedOut style="text-align: center;">
+    <div style="text-align: center; font-weight: bolder;" class="up-three">Sila log masuk</div>
+    <div class= "flex-parent jc-center">
+      <button type="button" class="button" (click)="navigatetologin()" style="width:150px;">Log Masuk</button>
+    </div>
+  </ng-template>
+     

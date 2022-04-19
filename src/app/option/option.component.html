@@ -1,0 +1,24 @@
+<div class="container" *ngIf="isLoggedIn; else loggedOut;">
+  <h1 style="padding-top:48px; color: black; font-size: 50px; text-align: center;margin-bottom: 1cm;"><strong><bold>Laman Utama</bold></strong></h1>
+  <div class= "flex-parent jc-center">
+    <button type="button" class="button" (click)="navigatetoCreate()" style="width:150px;">Cipta Sijil</button>
+  </div>
+  <div class= "flex-parent jc-center">
+    <button type="button" class="button" (click)="navigatetoCreateList()" style="width:150px;">Cipta Senarai Penerima</button>
+    </div>
+  <div class= "flex-parent jc-center">
+    <button type="button" class="button" (click)="navigatetoMyList()" style="width:150px;">Senarai Saya</button>
+    </div>
+  <div class= "flex-parent jc-center">
+    <button type="button" class="button" (click)="navigatetoImport()" style="width:150px;">Import Senarai Penerima</button>
+    </div>
+  </div>
+
+  
+  <ng-template #loggedOut style="text-align: center;">
+    <div style="text-align: center; font-weight: bolder;" class="up-three">Sila log masuk</div>
+    <div class= "flex-parent jc-center">
+      <button type="button" class="button" (click)="navigatetologin()" style="width:150px;">Log Masuk</button>
+    </div>
+  </ng-template>
+  

@@ -1,0 +1,78 @@
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<div style="margin-bottom:5%"></div>
+<div class="container" *ngIf="currentUser; else loggedOut">
+
+    <h2 style="text-align: center;font-size: 30px;"><strong>Cipta Sijil</strong></h2>
+      <div class="row">
+        <div class="col-25">
+          <label for="Name">Nama</label>
+        </div>
+        <div class="col-75">
+          <input [(ngModel)]="penerima.nama" required type="text" id="Name" name="Name" oninput="let p=this.selectionStart;this.value=this.value.toUpperCase();this.setSelectionRange(p, p);" placeholder="Masukkan nama">
+        </div>
+      </div>
+
+      <div class="row">
+        <div class="col-25">
+          <label for="IC">No. Kad Pengenalan</label>
+        </div>
+        <div class="col-75">
+          <input [(ngModel)]="penerima.nokadpengenalan" required type="text" id="ICnumber" name="IC" placeholder="Masukkan nombor kad pengenalan" >
+          
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-25">
+          <label for="peranan">Peranan</label>
+        </div>
+        <div class="col-75">
+          <select id="peranan" name="peranan" required [(ngModel)]="penerima.peranan">
+            <option value="" disabled selected>Sila pilih peranan</option>
+            <option value="Peserta">Peserta</option>
+            <option value="Urusetia">Urusetia</option>
+            <option value="Penceramah">Penceramah</option>
+          </select>
+        </div>
+      </div>
+      
+      <div class="row">
+        <div class="col-25">
+          <label for="program">Nama Program</label>
+        </div>
+        <div class="col-75" style="margin-bottom: 6px;">
+          <input [(ngModel)]="penerima.program" required type="text" id="program" name="program" placeholder="Masukkan nama program" oninput="let p=this.selectionStart;this.value=this.value.toUpperCase();this.setSelectionRange(p, p);">
+        </div>
+      </div>
+
+      <div class="row">
+        <div class="col-25">
+          <label class="control-label" for="tarikh">Tarikh</label>
+        </div>
+        <div class="col-75" id="tarikh">
+          <input type="text" id="tarikh" name="tarikh" placeholder="Masukkan tarikh program berlangsung" [(ngModel)]="penerima.tarikh">
+        </div>
+      </div>
+
+      <div class="row">
+        <div class="col-25">
+          <label for="tempat">Tempat Berlangsung</label>
+        </div>
+        <div class="col-75">
+          <input [(ngModel)]="penerima.tempat" required type="text" id="tempat" name="tempat" placeholder="Masukkan tempat program berlangsung">
+        </div>
+      </div>
+    
+
+        
+      <div class="flex-parent jc-center ">
+        <button type="button" class="button" style="margin-top:1cm; width:150px;" (click)="generatepdf()">Cipta Sijil</button>
+    </div>
+</div>
+
+
+<ng-template #loggedOut style="text-align: center;">
+  <div style="text-align: center; font-weight: bolder;" class="up-three">Sila log masuk</div>
+  <div class= "flex-parent jc-center">
+    <button type="button" class="button" (click)="navigatetologin()" style="width:150px;">Log Masuk</button>
+  </div>
+</ng-template>

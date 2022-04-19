@@ -1,0 +1,108 @@
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<script lang="javascript" src="dist/xlsx.full.min.js"></script>
+
+<div *ngIf="isLoggedIn;else loggedOut;">
+  <style>
+  #navbar {
+  overflow: hidden;
+  background-color: #6ec5c9;
+}
+
+#navbar a {
+  float: left;
+  display: block;
+  color: black;
+  text-align: center;
+  padding: 14px 16px;
+  text-decoration: none;
+  font-size: 17px;
+  font-weight: bold;
+}
+
+#navbar a:hover {
+  background-color:#addee0;
+  color: black;
+}
+
+#navbar a.active {
+  background-color: #addee0;
+  color: white;
+}
+.sticky {
+  position: fixed;
+  top: 0;
+  width: 100%;
+}
+
+.sticky + .content {
+  padding-top: 60px;
+}
+  </style>
+  <div id="navbar">
+      <a href="/home" class="navbar" style="display: inline-block;">
+          Laman Utama</a>
+      <a href="/profile" class="navbar" style="display: inline-block;">
+            Profil</a>
+      <a href="/admin" class="navbar" style="display: inline-block;" *ngIf="showAdminBoard">
+            Admin</a>
+      <a type="button" style="float:right;"
+      onclick="document.getElementById('id02').style.display='block';" 
+      class="navbar">
+      Log Keluar</a>
+      </div>
+  <script>
+    window.onscroll = function() {myFunction()};
+    
+    var navbar = document.getElementById("navbar");
+    var sticky = navbar.offsetTop;
+    
+    function myFunction() {
+      if (window.pageYOffset >= sticky) {
+        navbar.classList.add("sticky")
+      } else {
+        navbar.classList.remove("sticky");
+      }
+    }
+    </script>
+  <div id="id02" class="modal">
+  
+    <span onclick="document.getElementById('id02').style.display='none'" class="close" title="Close Modal">x</span>
+
+    <form class="modal-content" action="/action_page.php">
+      <div class="containing">
+        <h1 style="text-align: center; font-weight:bold;font-size: 24; padding-bottom: 0.5cm;">Log Keluar?</h1>
+        <div class="clearfix">
+          <button type="button" onclick="document.getElementById('id02').style.display='none'" class="cancelbtn">Batal</button>
+          <button type="button" class="deletebtn" (click)="logout()">Log Keluar</button>
+        </div>
+      </div>
+    </form>
+
+  </div>
+
+  <script>
+      var modal = document.getElementById('id02');
+      window.onclick = function(event){
+        if (event.target==modal){
+          modal.style.display = "none";
+      }
+    }
+    </script>
+  </div>
+
+
+  <ng-template #loggedOut style="text-align: center;">
+    <div>
+    <div id="navbar">
+      <a href="/home" class="navbar" style="display: inline-block;">
+          Laman Utama</a>
+      </div>
+  </div>
+  </ng-template>
+
+  <div class="container">
+    <router-outlet></router-outlet>
+  </div>
+  
+  
+  

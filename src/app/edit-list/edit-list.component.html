@@ -1,0 +1,102 @@
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<div style="margin-bottom:5%"></div>
+<div class="container submit-form" *ngIf="currentUser; else loggedOut">
+    <div>
+        <h2 style="text-align: center;"><strong>Edit Penerima</strong></h2>
+        <form>
+
+          <div class="row">
+              <div class="col-25">
+                  <label for ="nama">Nama</label>
+              </div>
+              <div class="col-75">
+                  <input 
+                  autocomplete=on
+                  class="form-control"
+                  type="text"
+                  id="nama"
+                  placeholder={{penerima.nama}}
+                  oninput="let p=this.selectionStart;this.value=this.value.toUpperCase();this.setSelectionRange(p, p);"
+                  required
+                  >
+                  <!--[(ngModel)]="penerima.nama"-->
+              </div>
+          </div>
+
+          <div class="row">
+            <div class="col-25">
+                <label for ="nokadpengenalan">No. Kad Pengenalan</label>
+            </div>
+            <div class="col-75">
+                <input 
+                class="form-control"
+                type="text"
+                id="nokadpengenalan"
+                placeholder={{penerima.nokadpengenalan}}
+                required
+                autocomplete=on>
+                <!--[(ngModel)]="penerima.nokadpengenalan"-->
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="col-25">
+                <label for ="peranan">Peranan</label>
+            </div>
+            <div class="col-75">
+                <select id="peranan" name="peranan" [(ngModel)]="penerima.peranan" required autocomplete=on>
+                    <!--[(ngModel)]="penerima.peranan" -->
+                    <option class="select" selected>{{penerima.peranan}}</option>
+                    <option value="Peserta">Peserta</option>
+                    <option value="Urusetia">Urusetia</option>
+                    <option value="Penceramah">Penceramah</option>
+                  </select>
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="col-25">
+              <label for="program">Nama Program</label>
+            </div>
+            <div class="col-75" style="margin-bottom: 6px;">
+              <input type="text" id="program" name="program" placeholder="Masukkan nama program" [(ngModel)]="penerima.program">
+              <!---->
+            </div>
+          </div>
+    
+          <div class="row">
+            <div class="col-25">
+              <label class="control-label" for="tarikh">Tarikh</label>
+            </div>
+            <div class="col-75" id="tarikh">
+              <input type="text" id="tarikh" name="tarikh" placeholder="Masukkan tarikh program berlangsung" [(ngModel)]="penerima.tarikh">
+              <!---->
+            </div>
+          </div>
+    
+          <div class="row">
+            <div class="col-25">
+              <label for="tempat">Tempat Berlangsung</label>
+            </div>
+            <div class="col-75">
+              <input type="text" id="tempat" name="tempat" placeholder="Masukkan tempat program berlangsung" [(ngModel)]="penerima.tempat">
+            <!---->
+            </div>
+          </div>
+
+        <div class="row flex-parent jc-center ">
+            <button type="submit button" (click)="updatePenerima()" class="button btn-success" style="width:150px;" >
+                <!--(click)="updatePenerima()"-->Kemas kini</button>
+        </div>
+
+        </form>
+    </div>
+</div>
+
+<ng-template #loggedOut style="text-align: center;">
+  <div style="text-align: center; font-weight: bolder;" class="up-three">Sila log masuk</div>
+  <div class= "flex-parent jc-center">
+    <button type="button" class="button" (click)="navigatetologin()" style="width:150px;">Log Masuk</button>
+  </div>
+</ng-template>
+

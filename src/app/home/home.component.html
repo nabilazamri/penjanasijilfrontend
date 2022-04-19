@@ -1,0 +1,16 @@
+
+<ul *ngIf="!isLoggedIn">
+    <h1 style="padding-top:120px;padding-bottom: 0.5cm; color: black; font-size: 48px; text-align: center;"><strong><bold>Penjana Sijil Atas Talian</bold></strong></h1>
+    <div class= "flex-parent jc-center">
+      <button type="button" class="button" (click)="navigatetologin()" style="width:150px;">Log Masuk</button>
+    </div>
+    <div class= "flex-parent jc-center">
+      <button type="button" class="button" (click)="navigatetoregister()" style="width:150px;">Daftar Akaun</button>
+      </div>
+</ul>
+
+
+  <div class="container">
+    <router-outlet></router-outlet>
+  </div>
+  
